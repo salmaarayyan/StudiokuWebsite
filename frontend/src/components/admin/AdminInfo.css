@@ -1,0 +1,65 @@
+:root {
+  --accent: #efab46;
+  --bg: #eeeaeb;
+  --text: #000405;
+  --muted: #4b4f54;
+  --card: #ffffff;
+  --shadow: 0 14px 35px rgba(0, 4, 5, 0.08);
+  --radius: 18px;
+}
+
+.admin-info-panel {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+  width: 100%;
+  height: fit-content;
+}
+
+.info-header {
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.info-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+}
+
+.info-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.info-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.info-value {
+  font-size: 14px;
+  color: var(--text);
+  word-break: break-all;
+  margin: 0;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .admin-info-panel {
+    width: 100%;
+  }
+}
