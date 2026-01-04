@@ -1,0 +1,131 @@
+:root {
+  --accent: #efab46;
+  --bg: #eeeaeb;
+  --text: #000405;
+  --muted: #4b4f54;
+  --card: #ffffff;
+  --shadow: 0 14px 35px rgba(0, 4, 5, 0.08);
+  --radius: 18px;
+}
+
+.admin-navbar {
+  background: var(--card);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  box-shadow: var(--shadow);
+}
+
+.admin-nav {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+.admin-nav-item {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: capitalize;
+  border-bottom: 2px solid transparent;
+}
+
+.admin-nav-item:hover {
+  color: var(--text);
+}
+
+.admin-nav-item.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.logout-nav-btn {
+  background: none;
+  border: none;
+  color: #dc3545;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-radius: 6px;
+}
+
+.logout-nav-btn:hover {
+  background: rgba(220, 53, 69, 0.1);
+  color: #c82333;
+}
+
+.admin-nav-right {
+  display: flex;
+  align-items: center;
+}
+
+.admin-search-form {
+  display: flex;
+  align-items: center;
+  background: var(--bg);
+  border-radius: 20px;
+  padding: 8px 16px;
+  gap: 8px;
+}
+
+.admin-search-input {
+  border: none;
+  background: transparent;
+  outline: none;
+  color: var(--text);
+  font-size: 14px;
+  width: 200px;
+  font-family: inherit;
+}
+
+.admin-search-input::placeholder {
+  color: var(--muted);
+}
+
+.admin-search-btn {
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 16px;
+  transition: color 0.2s;
+}
+
+.admin-search-btn:hover {
+  color: var(--accent);
+}
+
+@media (max-width: 768px) {
+  .admin-navbar {
+    flex-direction: column;
+    gap: 12px;
+    padding: 14px 16px;
+    align-items: flex-start;
+  }
+
+  .admin-nav {
+    flex-wrap: wrap;
+  }
+
+  .admin-nav-item {
+    font-size: 12px;
+    padding: 8px 10px;
+  }
+
+  .admin-search-input {
+    width: 150px;
+  }
+}
