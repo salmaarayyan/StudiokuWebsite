@@ -1,0 +1,22 @@
+:root {
+  --accent: #efab46;
+  --bg: #eeeaeb;
+  --text: #000405;
+  --muted: #4b4f54;
+  --card: #ffffff;
+  --shadow: 0 14px 35px rgba(0, 4, 5, 0.08);
+  --radius: 18px;
+}
+
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  background: var(--bg);
+}
+
+.admin-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-left: 80px;
+}
