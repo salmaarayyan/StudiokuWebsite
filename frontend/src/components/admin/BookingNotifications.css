@@ -1,0 +1,191 @@
+:root {
+  --accent: #efab46;
+  --bg: #eeeaeb;
+  --text: #000405;
+  --muted: #4b4f54;
+  --card: #ffffff;
+  --shadow: 0 14px 35px rgba(0, 4, 5, 0.08);
+  --radius: 18px;
+}
+
+.booking-notifications {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+  width: 100%;
+}
+
+.notifications-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.notifications-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+}
+
+.refresh-btn {
+  background: var(--bg);
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  transition: all 0.2s ease;
+}
+
+.refresh-btn:hover {
+  background: var(--accent);
+  transform: rotate(180deg);
+}
+
+.notifications-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.notifications-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.notifications-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.notifications-list::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 3px;
+}
+
+.notifications-list::-webkit-scrollbar-thumb:hover {
+  background: #d4934f;
+}
+
+.loading-text,
+.empty-text {
+  text-align: center;
+  color: var(--muted);
+  font-size: 14px;
+  padding: 20px;
+  margin: 0;
+}
+
+.notification-item {
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+  padding: 16px;
+  transition: all 0.2s ease;
+}
+
+.notification-item:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-color: var(--accent);
+}
+
+.notification-main {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.notification-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.customer-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0;
+}
+
+.booking-date {
+  font-size: 11px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.notification-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.info-row {
+  display: flex;
+  gap: 8px;
+  font-size: 12px;
+}
+
+.info-label {
+  font-weight: 600;
+  color: var(--muted);
+  min-width: 50px;
+}
+
+.info-value {
+  color: var(--text);
+  flex: 1;
+  word-break: break-word;
+}
+
+.email-link-btn {
+  background: var(--accent);
+  color: var(--text);
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  align-self: flex-start;
+  margin-top: 8px;
+}
+
+.email-link-btn:hover {
+  background: #f1b85b;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(239, 171, 70, 0.3);
+}
+
+.email-link-btn:active {
+  transform: scale(0.95);
+}
+
+@media (max-width: 768px) {
+  .booking-notifications {
+    padding: 16px;
+  }
+
+  .notifications-list {
+    max-height: 400px;
+  }
+
+  .notification-header {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .booking-date {
+    align-self: flex-start;
+  }
+}
