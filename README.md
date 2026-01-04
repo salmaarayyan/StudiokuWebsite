@@ -66,11 +66,11 @@ Website reservasi studio foto untuk Studioku Jogja. Dibangun menggunakan React u
 *Admin melihat dan mengelola daftar booking*
 
 #### Kelola Jadwal
-![Admin Jadwal](documentation/screenshots/admin_jadwal.jpeg)
+![Admin Jadwal](documentation/screenshots/admin_logout.jpeg)
 *Admin mengatur jadwal blokir (tidak tersedia)*
 
 #### Logout Admin
-![Admin Logout](documentation/screenshots/admin_logout.jpeg)
+![Admin Logout](documentation/screenshots/admin_jadwal.jpeg)
 *Admin melakukan logout dari sistem*
 
 ## Fitur Utama
