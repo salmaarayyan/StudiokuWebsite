@@ -1,0 +1,84 @@
+@startuml
+title Entity Relationship Diagram\nWebsite Katalog Self Photo UMKM "Studioku Jogja"
+
+entity users {
+  + id : INT <<PK>>
+  --
+  username : VARCHAR(50)
+  password : VARCHAR(255)
+  email : VARCHAR(100)
+  createdAt : TIMESTAMP
+  updatedAt : TIMESTAMP
+}
+
+entity layanans {
+  + id : INT <<PK>>
+  --
+  name : VARCHAR(100)
+  description : TEXT
+  price : DECIMAL(10,2)
+  pricing_type : ENUM('per_session', 'per_person')
+  duration : INT
+  min_person : INT
+  max_person : INT
+  createdAt : TIMESTAMP
+  updatedAt : TIMESTAMP
+}
+
+entity galleries {
+  + id : INT <<PK>>
+  --
+  image_url : VARCHAR(255)
+  caption : VARCHAR(255)
+  createdAt : TIMESTAMP
+  updatedAt : TIMESTAMP
+}
+
+entity testimonials {
+  + id : INT <<PK>>
+  --
+  customer_name : VARCHAR(100)
+  rating : INT
+  message : TEXT
+  gallery_id : INT <<FK>> (optional)
+  createdAt : TIMESTAMP
+  updatedAt : TIMESTAMP
+}
+
+entity bookings {
+  + id : INT <<PK>>
+  --
+  customer_name : VARCHAR(100)
+  customer_email : VARCHAR(100)
+  customer_phone : VARCHAR(20)
+  booking_date : DATE
+  booking_time : TIME
+  time_slot : TIME
+  selected_package : VARCHAR(50)
+  layanan_id : INT <<FK>> (optional)
+  additional_person : INT
+  background_choice : VARCHAR(100)
+  payment_method : ENUM
+  total_price : DECIMAL(10,2)
+  status : ENUM('pending', 'confirmed', 'cancelled')
+  notes : TEXT
+  createdAt : TIMESTAMP
+  updatedAt : TIMESTAMP
+}
+
+entity admin_blocks {
+  + id : INT <<PK>>
+  --
+  date : DATE
+  start_time : TIME
+  end_time : TIME
+  reason : VARCHAR(100)
+  createdAt : TIMESTAMP
+  updatedAt : TIMESTAMP
+}
+
+' ==== RELATIONSHIP ====
+galleries ||--o{ testimonials : memiliki
+layanans ||--o{ bookings : memiliki
+
+@enduml

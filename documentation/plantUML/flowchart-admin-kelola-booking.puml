@@ -1,0 +1,62 @@
+@startuml
+title Flowchart Kelola Booking (Admin)
+
+start
+:Admin masuk ke menu Kelola Booking;
+:Sistem tampilkan list booking;
+note right
+  Booking masuk dari user:
+  - User submit booking
+  - Data tersimpan di database
+  - Email notifikasi terkirim ke admin
+end note
+
+:Admin pilih aksi;
+
+if (Pilih aksi?) then (Read/View)
+  :Admin pilih booking dari list;
+  :Sistem tampilkan detail booking:
+  - Nama Customer
+  - Email & Phone
+  - Tanggal & Jam
+  - Paket Layanan
+  - Background/Jumlah Orang
+  - Total Harga
+  - Status
+  - Notes;
+  :Admin kembali ke list;
+
+elseif (Pilih aksi?) then (Update)
+  :Admin pilih booking dari list;
+  :Admin klik tombol Update;
+  :Sistem tampilkan modal dropdown status;
+  :Admin pilih status:
+  - Pending
+  - Confirmed
+  - Cancelled;
+  :Admin klik Update;
+  :Sistem update status di database;
+  :Tampilkan notifikasi sukses;
+  :Refresh list booking;
+
+elseif (Pilih aksi?) then (Delete)
+  :Admin pilih booking dari list;
+  :Admin klik tombol Hapus;
+  :Sistem tampilkan popup konfirmasi;
+  
+  if (Yakin hapus?) then (Ya)
+    :Hapus data dari database;
+    :Tampilkan notifikasi sukses;
+    :Refresh list booking;
+  else (Tidak)
+    :Tutup popup;
+    :Kembali ke list;
+  endif
+
+else (Keluar)
+  :Admin keluar dari menu;
+endif
+
+stop
+
+@enduml

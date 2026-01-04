@@ -1,0 +1,71 @@
+@startuml
+title Flowchart Kelola Testimoni (Admin)
+
+start
+:Admin masuk ke menu Kelola Testimoni;
+:Sistem tampilkan list testimoni;
+
+:Admin pilih aksi;
+
+if (Pilih aksi?) then (Create)
+  repeat
+    :Admin klik tombol Tambah Testimoni;
+    :Sistem tampilkan form input;
+    :Admin isi form:
+    - Nama Customer
+    - Rating
+    - Message
+    - Pilih Gallery (optional);
+    :Admin klik Simpan;
+    :Sistem validasi form;
+    
+    if (Valid?) then (Ya)
+      :Insert data ke database;
+      :Tampilkan notifikasi sukses;
+      :Refresh list testimoni;
+      break
+    else (Tidak)
+      :Tampilkan pesan error;
+    endif
+  repeat while (Form belum valid?)
+
+elseif (Pilih aksi?) then (Update)
+  repeat
+    :Admin pilih testimoni dari list;
+    :Admin klik tombol Edit;
+    :Sistem tampilkan form dengan data lama;
+    :Admin edit data;
+    :Admin klik Simpan;
+    :Sistem validasi form;
+    
+    if (Valid?) then (Ya)
+      :Update data di database;
+      :Tampilkan notifikasi sukses;
+      :Refresh list testimoni;
+      break
+    else (Tidak)
+      :Tampilkan pesan error;
+    endif
+  repeat while (Form belum valid?)
+
+elseif (Pilih aksi?) then (Delete)
+  :Admin pilih testimoni dari list;
+  :Admin klik tombol Hapus;
+  :Sistem tampilkan popup konfirmasi;
+  
+  if (Yakin hapus?) then (Ya)
+    :Hapus data dari database;
+    :Tampilkan notifikasi sukses;
+    :Refresh list testimoni;
+  else (Tidak)
+    :Tutup popup;
+    :Kembali ke list;
+  endif
+
+else (Keluar)
+  :Admin keluar dari menu;
+endif
+
+stop
+
+@enduml

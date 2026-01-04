@@ -1,0 +1,53 @@
+@startuml AD Admin Delete Testimoni
+title Activity Diagram - Admin Delete Testimoni
+
+|Admin|
+start
+:Pilih testimoni yang akan dihapus;
+:Klik tombol Delete;
+
+|Sistem|
+:Tampilkan popup konfirmasi
+"Apakah Anda yakin ingin
+menghapus testimoni ini?";
+
+|Admin|
+if (Konfirmasi hapus?) then (tidak)
+  :Klik Batal;
+  |Sistem|
+  :Tutup popup;
+  |Admin|
+  :Kembali ke list testimoni;
+  stop
+else (ya)
+  :Klik Hapus;
+  
+  |Database|
+  :DELETE FROM testimonials WHERE id = ?;
+  
+  |Sistem|
+  if (Delete berhasil?) then (ya)
+    :Return success;
+    :Tampilkan notifikasi
+    "Testimoni berhasil dihapus";
+    |Database|
+    :SELECT * FROM testimonials;
+    |Sistem|
+    :Return data terbaru;
+    :Refresh list testimoni;
+  else (tidak)
+    :Return error;
+    :Tampilkan pesan error
+    dari response API;
+    |Admin|
+    :Melihat pesan error;
+    stop
+  endif
+  
+  |Admin|
+  :Melihat list testimoni
+  yang sudah diupdate;
+  stop
+endif
+
+@enduml

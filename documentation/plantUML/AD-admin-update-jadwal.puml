@@ -1,0 +1,49 @@
+@startuml AD Admin Update Jadwal
+title Activity Diagram - Admin Update Jadwal (Admin Block)
+
+|Admin|
+start
+:Lihat kalender jadwal;
+:Klik tanggal yang akan diblock;
+:Klik waktu yang akan diblock;
+
+|Sistem|
+:Tampilkan form popup:
+- Alasan block;
+
+|Admin|
+:Input alasan;
+:Klik Simpan;
+
+|Sistem|
+:Kirim data ke API;
+
+|Database|
+:INSERT INTO admin_blocks
+(date, start_time, end_time, reason);
+
+|Sistem|
+if (Insert berhasil?) then (ya)
+  :Return success;
+  :Tampilkan notifikasi
+  "Jadwal berhasil diblock";
+  |Database|
+  :SELECT * FROM admin_blocks;
+  |Sistem|
+  :Return data terbaru;
+  :Refresh kalender;
+else (tidak)
+  :Return error;
+  :Tampilkan pesan error
+  dari response API;
+  |Admin|
+  :Melihat pesan error;
+  stop
+endif
+
+|Admin|
+:Melihat kalender
+yang sudah diperbarui;
+stop
+
+@enduml

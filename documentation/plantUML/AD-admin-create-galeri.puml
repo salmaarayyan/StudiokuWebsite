@@ -1,0 +1,50 @@
+@startuml AD Admin Create Galeri
+title Activity Diagram - Admin Create Galeri
+
+|Admin|
+start
+:Klik tombol Tambah Galeri;
+
+|Sistem|
+:Tampilkan form:
+- Upload gambar
+- Caption;
+
+|Admin|
+:Pilih file gambar;
+:Input caption;
+:Klik Simpan;
+
+|Sistem|
+:Proses upload file ke folder;
+:Dapatkan URL file;
+
+|Database|
+:INSERT INTO galleries
+(image_url, caption);
+
+|Sistem|
+if (Insert berhasil?) then (ya)
+  :Return success;
+  :Tampilkan notifikasi
+  "Galeri berhasil ditambahkan";
+  |Database|
+  :SELECT * FROM galleries;
+  |Sistem|
+  :Return data terbaru;
+  :Refresh list galeri;
+else (tidak)
+  :Return error;
+  :Tampilkan pesan error
+  dari response API;
+  |Admin|
+  :Melihat pesan error;
+  stop
+endif
+
+|Admin|
+:Melihat list galeri
+yang sudah diperbarui;
+stop
+
+@enduml

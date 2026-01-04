@@ -1,0 +1,21 @@
+@startuml
+title Flowchart Login Admin
+
+start
+:Admin buka halaman login;
+:Masukkan email & password;
+:Klik tombol Login;
+:Sistem validasi kredensial;
+
+if (Kredensial benar?) then (Ya)
+  :Generate JWT token;
+  :Redirect ke dashboard admin;
+  stop
+else (Tidak)
+  :Tampilkan pesan error;
+  :Email atau password salah;
+  :Kembali ke form login;
+  stop
+endif
+
+@enduml

@@ -1,0 +1,57 @@
+@startuml AD Admin Delete Galeri
+title Activity Diagram - Admin Delete Galeri
+
+|Admin|
+start
+:Pilih gambar yang akan dihapus;
+:Klik tombol Delete;
+
+|Sistem|
+:Tampilkan popup konfirmasi
+"Apakah Anda yakin ingin
+menghapus galeri ini?";
+
+|Admin|
+if (Konfirmasi hapus?) then (tidak)
+  :Klik Batal;
+  |Sistem|
+  :Tutup popup;
+  |Admin|
+  :Kembali ke list galeri;
+  stop
+else (ya)
+  :Klik Hapus;
+  
+  |Sistem|
+  :Ambil path file untuk dihapus;
+  
+  |Database|
+  :DELETE FROM galleries WHERE id = ?;
+  
+  |Sistem|
+  if (Delete berhasil?) then (ya)
+    :Return success;
+    :Hapus file dari folder storage;
+    :Tampilkan notifikasi
+    "Galeri berhasil dihapus";
+    |Database|
+    :SELECT * FROM galleries;
+    |Sistem|
+    :Return data terbaru;
+    :Refresh list galeri;
+  else (tidak)
+    :Return error;
+    :Tampilkan pesan error
+    dari response API;
+    |Admin|
+    :Melihat pesan error;
+    stop
+  endif
+  
+  |Admin|
+  :Melihat list galeri
+  yang sudah diupdate;
+  stop
+endif
+
+@enduml

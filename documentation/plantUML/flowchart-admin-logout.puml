@@ -1,0 +1,18 @@
+@startuml
+title Flowchart Logout Admin
+
+start
+:Admin klik tombol Logout;
+:Sistem tampilkan popup konfirmasi;
+
+if (Yakin ingin logout?) then (Ya)
+  :Hapus JWT token;
+  :Redirect ke halaman login;
+  stop
+else (Tidak)
+  :Tutup popup;
+  :Kembali ke dashboard;
+  stop
+endif
+
+@enduml

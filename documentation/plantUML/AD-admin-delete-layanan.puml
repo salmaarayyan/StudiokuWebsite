@@ -1,0 +1,47 @@
+@startuml AD Admin Delete Layanan
+title Activity Diagram - Admin Delete Layanan
+
+|Admin|
+start
+:Pilih layanan yang akan dihapus;
+:Klik tombol Delete;
+
+|Sistem|
+:Tampilkan popup konfirmasi
+"Apakah Anda yakin ingin
+menghapus layanan ini?";
+
+|Admin|
+if (Konfirmasi hapus?) then (tidak)
+  :Klik Batal;
+  |Sistem|
+  :Tutup popup;
+  |Admin|
+  :Kembali ke list layanan;
+  stop
+else (ya)
+  :Klik Hapus;
+  
+  |Database|
+  :DELETE FROM layanans
+  WHERE id = ?;
+  :Return success;
+  
+  |Sistem|
+  :Tampilkan notifikasi
+  "Layanan berhasil dihapus";
+  
+  |Database|
+  :SELECT * FROM layanans;
+  :Return data terbaru;
+  
+  |Sistem|
+  :Refresh list layanan;
+  
+  |Admin|
+  :Melihat list layanan
+  yang sudah diupdate;
+  stop
+endif
+
+@enduml

@@ -1,0 +1,96 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Customer" as customer
+actor "Admin" as admin
+
+rectangle "Website Katalog Studioku Jogja" {
+  ' ===== ADMIN USE CASES =====
+  usecase "Login Admin" as UC_LoginAdmin
+  usecase "Logout Admin" as UC_LogoutAdmin
+  usecase "Create Layanan" as UC_CreateLayanan
+  usecase "Update Layanan" as UC_UpdateLayanan
+  usecase "Delete Layanan" as UC_DeleteLayanan
+  
+  usecase "Create Galeri" as UC_CreateGaleri
+  usecase "Update Galeri" as UC_UpdateGaleri
+  usecase "Delete Galeri" as UC_DeleteGaleri
+  
+  usecase "Create Testimoni" as UC_CreateTestimoni
+  usecase "Update Testimoni" as UC_UpdateTestimoni
+  usecase "Delete Testimoni" as UC_DeleteTestimoni
+  
+  usecase "Update Booking" as UC_UpdateBooking
+  usecase "Delete Booking" as UC_DeleteBooking
+  
+  usecase "Update Jadwal" as UC_UpdateJadwal
+  
+  ' ===== USER USE CASES =====
+  usecase "Lihat Layanan" as UC_LihatLayanan
+  usecase "Booking Layanan" as UC_BookingLayanan
+  usecase "Lihat Harga" as UC_LihatHarga
+  usecase "Pilih Tanggal" as UC_PilihTanggal
+  usecase "Pilih Jam" as UC_PilihJam
+  usecase "Isi Form Booking" as UC_IsiFform
+  usecase "Kirim Reservasi" as UC_KirimReservasi
+  
+  usecase "Lihat Galeri" as UC_LihatGaleri
+  usecase "Lihat Testimoni" as UC_LihatTestimoni
+  usecase "Lihat Info Studio" as UC_LihatInfoStudio
+  usecase "Lihat Lokasi Studio" as UC_LihatLokasi
+  usecase "Lihat Kontak Studio" as UC_LihatKontak
+  
+  ' ===== SYSTEM USE CASES =====
+  usecase "Sistem Kirim Email ke Admin" as UC_KirimEmail
+}
+
+' ===== ADMIN RELATIONS =====
+admin --> UC_CreateLayanan
+admin --> UC_UpdateLayanan
+admin --> UC_DeleteLayanan
+admin --> UC_CreateGaleri
+admin --> UC_UpdateGaleri
+admin --> UC_DeleteGaleri
+admin --> UC_CreateTestimoni
+admin --> UC_UpdateTestimoni
+admin --> UC_DeleteTestimoni
+admin --> UC_UpdateBooking
+admin --> UC_DeleteBooking
+admin --> UC_UpdateJadwal
+
+UC_CreateLayanan ..> UC_LoginAdmin : <<include>>
+UC_UpdateLayanan ..> UC_LoginAdmin : <<include>>
+UC_DeleteLayanan ..> UC_LoginAdmin : <<include>>
+UC_CreateGaleri ..> UC_LoginAdmin : <<include>>
+UC_UpdateGaleri ..> UC_LoginAdmin : <<include>>
+UC_DeleteGaleri ..> UC_LoginAdmin : <<include>>
+UC_CreateTestimoni ..> UC_LoginAdmin : <<include>>
+UC_UpdateTestimoni ..> UC_LoginAdmin : <<include>>
+UC_DeleteTestimoni ..> UC_LoginAdmin : <<include>>
+UC_UpdateBooking ..> UC_LoginAdmin : <<include>>
+UC_DeleteBooking ..> UC_LoginAdmin : <<include>>
+UC_UpdateJadwal ..> UC_LoginAdmin : <<include>>
+
+UC_LoginAdmin .up.> UC_LogoutAdmin : <<extend>>
+
+' ===== USER RELATIONS =====
+customer --> UC_LihatLayanan
+customer --> UC_LihatGaleri
+customer --> UC_LihatTestimoni
+customer --> UC_LihatInfoStudio
+
+UC_LihatLayanan .down.> UC_BookingLayanan : <<extend>>
+
+UC_BookingLayanan ..> UC_LihatHarga : <<include>>
+UC_BookingLayanan ..> UC_PilihTanggal : <<include>>
+UC_BookingLayanan ..> UC_PilihJam : <<include>>
+UC_BookingLayanan ..> UC_IsiFform : <<include>>
+UC_BookingLayanan ..> UC_KirimReservasi : <<include>>
+
+UC_KirimReservasi ..> UC_KirimEmail : <<include>>
+
+UC_LihatInfoStudio ..> UC_LihatLokasi : <<include>>
+UC_LihatInfoStudio ..> UC_LihatKontak : <<include>>
+
+@enduml

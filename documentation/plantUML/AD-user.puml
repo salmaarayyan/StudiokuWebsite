@@ -1,0 +1,93 @@
+@startuml AD User
+title Activity Diagram - User
+
+|User|
+start
+:Buka website;
+
+|Sistem|
+:Tampilkan dashboard dengan:
+- Layanan
+- Galeri
+- Testimoni
+- Info Studio;
+
+|User|
+:Melihat layanan;
+:Melihat galeri;
+:Melihat testimoni;
+:Melihat info studio;
+
+if (Ingin booking?) then (ya)
+  :Klik halaman Layanan;
+  
+  |Sistem|
+  :Ambil data layanan;
+  
+  |Database|
+  :SELECT * FROM layanans;
+  
+  |Sistem|
+  :Return data layanan;
+  :Tampilkan list layanan;
+  
+  |User|
+  :Pilih paket layanan;
+  :Pilih tanggal;
+  
+  |Sistem|
+  :Cek ketersediaan tanggal;
+  
+  |Database|
+  :SELECT admin_blocks WHERE date = ?;
+  :SELECT bookings WHERE booking_date = ?;
+  
+  |Sistem|
+  :Return data ketersediaan;
+  :Tampilkan slot waktu available;
+  
+  |User|
+  :Pilih jam/slot waktu;
+  :Isi form booking:
+  - Nama
+  - Email
+  - Phone
+  - Additional person (opsional)
+  - Background choice (jika bukan photobox)
+  - Payment method
+  - Notes (opsional);
+  :Klik Submit;
+  
+  |Sistem|
+  :Validasi form;
+  :Hitung total harga;
+  
+  |Database|
+  :INSERT INTO bookings
+  (customer_name, email, phone,
+  booking_date, booking_time,
+  selected_package, layanan_id,
+  additional_person, background_choice,
+  payment_method, total_price,
+  status, notes);
+  
+  |Sistem|
+  if (Insert berhasil?) then (ya)
+    :Return success;
+    :Kirim email notifikasi ke admin;
+    :Tampilkan modal sukses
+    "Booking berhasil!";
+  else (tidak)
+    :Return error;
+    :Tampilkan pesan error;
+  endif
+  
+  |User|
+  :Melihat hasil booking;
+  stop
+else (tidak)
+  :Keluar dari website;
+  stop
+endif
+
+@enduml

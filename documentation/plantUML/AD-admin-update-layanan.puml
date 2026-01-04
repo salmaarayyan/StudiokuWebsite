@@ -1,0 +1,62 @@
+@startuml AD Admin Update Layanan
+title Activity Diagram - Admin Update Layanan
+
+|Admin|
+start
+:Pilih layanan dari list;
+:Klik tombol Edit;
+
+|Sistem|
+:Ambil data layanan;
+
+|Database|
+:SELECT layanan WHERE id = ?;
+
+|Sistem|
+:Return data layanan;
+:Tampilkan form edit dengan data terisi:
+- Nama
+- Deskripsi
+- Harga
+- Durasi
+- Min person
+- Max person
+- Pricing type;
+
+|Admin|
+:Edit field yang diperlukan;
+:Klik Simpan Perubahan;
+
+|Sistem|
+:Kirim data ke API;
+
+|Database|
+:UPDATE layanans
+SET nama, deskripsi, harga,
+durasi, min_person, max_person,
+pricing_type WHERE id = ?;
+
+|Sistem|
+if (Update berhasil?) then (ya)
+  :Return success;
+  :Tampilkan notifikasi
+  "Layanan berhasil diupdate";
+  |Database|
+  :SELECT * FROM layanans;
+  |Sistem|
+  :Return data terbaru;
+  :Refresh list layanan;
+else (tidak)
+  :Return error;
+  :Tampilkan pesan error
+  dari response API;
+  |Admin|
+  :Melihat pesan error;
+  stop
+endif
+
+|Admin|
+:Melihat update layanan;
+stop
+
+@enduml

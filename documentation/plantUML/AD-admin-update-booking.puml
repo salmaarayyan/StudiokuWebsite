@@ -1,0 +1,57 @@
+@startuml AD Admin Update Booking
+title Activity Diagram - Admin Update Booking
+
+|Admin|
+start
+:Pilih booking dari list;
+:Klik tombol Edit/Update Status;
+
+|Sistem|
+:Ambil data booking;
+
+|Database|
+:SELECT bookings WHERE id = ?;
+
+|Sistem|
+:Return data booking;
+:Tampilkan form/dropdown status:
+- Pending
+- Confirmed
+- Cancelled;
+
+|Admin|
+:Pilih status baru;
+:Klik Simpan;
+
+|Sistem|
+:Kirim data ke API;
+
+|Database|
+:UPDATE bookings
+SET status WHERE id = ?;
+
+|Sistem|
+if (Update berhasil?) then (ya)
+  :Return success;
+  :Tampilkan notifikasi
+  "Status booking berhasil diupdate";
+  |Database|
+  :SELECT * FROM bookings;
+  |Sistem|
+  :Return data terbaru;
+  :Refresh list booking;
+else (tidak)
+  :Return error;
+  :Tampilkan pesan error
+  dari response API;
+  |Admin|
+  :Melihat pesan error;
+  stop
+endif
+
+|Admin|
+:Melihat list booking
+yang sudah diperbarui;
+stop
+
+@enduml

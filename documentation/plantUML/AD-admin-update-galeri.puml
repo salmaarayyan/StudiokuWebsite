@@ -1,0 +1,56 @@
+@startuml AD Admin Update Galeri
+title Activity Diagram - Admin Update Galeri
+
+|Admin|
+start
+:Pilih gambar dari list;
+:Klik tombol Edit;
+
+|Sistem|
+:Ambil data galeri;
+
+|Database|
+:SELECT galleries WHERE id = ?;
+
+|Sistem|
+:Return data galeri;
+:Tampilkan form edit dengan:
+- Gambar saat ini
+- Caption terisi;
+
+|Admin|
+:Edit caption (opsional);
+:Klik Simpan Perubahan;
+
+|Sistem|
+:Kirim data ke API;
+
+|Database|
+:UPDATE galleries
+SET caption WHERE id = ?;
+
+|Sistem|
+if (Update berhasil?) then (ya)
+  :Return success;
+  :Tampilkan notifikasi
+  "Galeri berhasil diupdate";
+  |Database|
+  :SELECT * FROM galleries;
+  |Sistem|
+  :Return data terbaru;
+  :Refresh list galeri;
+else (tidak)
+  :Return error;
+  :Tampilkan pesan error
+  dari response API;
+  |Admin|
+  :Melihat pesan error;
+  stop
+endif
+
+|Admin|
+:Melihat list galeri
+yang sudah diperbarui;
+stop
+
+@enduml

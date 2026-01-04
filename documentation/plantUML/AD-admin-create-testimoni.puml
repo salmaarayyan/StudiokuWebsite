@@ -1,0 +1,54 @@
+@startuml AD Admin Create Testimoni
+title Activity Diagram - Admin Create Testimoni
+
+|Admin|
+start
+:Klik tombol Tambah Testimoni;
+
+|Sistem|
+:Tampilkan form:
+- Nama customer
+- Rating
+- Message
+- Gallery (opsional);
+
+|Admin|
+:Input nama customer;
+:Input rating;
+:Input message;
+:Pilih gallery (opsional);
+:Klik Simpan;
+
+|Sistem|
+:Kirim data ke API;
+
+|Database|
+:INSERT INTO testimonials
+(customer_name, rating, 
+message, gallery_id);
+
+|Sistem|
+if (Insert berhasil?) then (ya)
+  :Return success;
+  :Tampilkan notifikasi
+  "Testimoni berhasil ditambahkan";
+  |Database|
+  :SELECT * FROM testimonials;
+  |Sistem|
+  :Return data terbaru;
+  :Refresh list testimoni;
+else (tidak)
+  :Return error;
+  :Tampilkan pesan error
+  dari response API;
+  |Admin|
+  :Melihat pesan error;
+  stop
+endif
+
+|Admin|
+:Melihat list testimoni
+yang sudah diperbarui;
+stop
+
+@enduml

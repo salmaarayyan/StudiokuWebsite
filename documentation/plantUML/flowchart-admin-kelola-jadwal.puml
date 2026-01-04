@@ -1,0 +1,28 @@
+@startuml
+title Flowchart Kelola Jadwal (Admin)
+
+start
+:Admin masuk ke menu Kelola Jadwal;
+:Sistem tampilkan calendar minggu ini;
+:Admin pilih slot jam di calendar;
+:Admin klik slot;
+:Sistem tampilkan popup form;
+:Admin isi form:
+- Pilih alasan (maintenance/istirahat/tutup)
+- Set start time
+- Set end time;
+:Admin klik Simpan;
+:Sistem validasi form;
+
+if (Valid?) then (Ya)
+  :Insert admin block ke database;
+  :Tampilkan notifikasi sukses;
+  :Refresh calendar;
+  stop
+else (Tidak)
+  :Tampilkan pesan error;
+  :Kembali ke form;
+  stop
+endif
+
+@enduml

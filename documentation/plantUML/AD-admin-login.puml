@@ -1,0 +1,46 @@
+@startuml
+title Activity Diagram - Login Admin
+
+|Admin|
+start
+:Buka halaman login;
+:Masukkan email & password;
+:Klik tombol Login;
+
+|Sistem|
+:Terima data login;
+:Validasi format email & password;
+
+if (Format valid?) then (Tidak)
+  :Tampilkan pesan error\n"Format tidak valid";
+  |Admin|
+  stop
+else (Ya)
+endif
+
+|Database|
+:Cari user berdasarkan email;
+:Return data user;
+
+|Sistem|
+if (User ditemukan?) then (Tidak)
+  :Tampilkan pesan error\n"Email tidak terdaftar";
+  |Admin|
+  stop
+else (Ya)
+  :Verifikasi password (bcrypt);
+  
+  if (Password benar?) then (Tidak)
+    :Tampilkan pesan error\n"Password salah";
+    |Admin|
+    stop
+  else (Ya)
+    :Generate JWT token;
+    :Simpan token di localStorage;
+    :Redirect ke dashboard admin;
+    |Admin|
+    stop
+  endif
+endif
+
+@enduml

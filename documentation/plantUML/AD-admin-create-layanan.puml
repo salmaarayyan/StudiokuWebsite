@@ -1,0 +1,61 @@
+@startuml
+title Activity Diagram - Create Layanan
+
+|Admin|
+start
+:Klik tombol "Tambah Layanan";
+
+|Sistem|
+:Tampilkan form input layanan;
+
+|Admin|
+:Isi form:
+- Nama Layanan
+- Deskripsi
+- Harga
+- Tipe Harga (per_session/per_person)
+- Durasi (menit)
+- Min Person
+- Max Person;
+:Klik tombol "Simpan";
+
+|Sistem|
+:Terima data form;
+:Validasi form;
+
+if (Semua field terisi?) then (Tidak)
+  :Tampilkan pesan error\n"Semua field wajib diisi";
+  |Admin|
+  :Kembali ke form;
+  stop
+else (Ya)
+endif
+
+if (Harga valid (angka > 0)?) then (Tidak)
+  :Tampilkan pesan error\n"Harga harus angka positif";
+  |Admin|
+  :Kembali ke form;
+  stop
+else (Ya)
+endif
+
+if (Min Person <= Max Person?) then (Tidak)
+  :Tampilkan pesan error\n"Min Person harus <= Max Person";
+  |Admin|
+  :Kembali ke form;
+  stop
+else (Ya)
+endif
+
+|Database|
+:Insert data layanan baru;
+:Return status berhasil;
+
+|Sistem|
+:Tampilkan notifikasi sukses\n"Layanan berhasil ditambahkan";
+:Refresh list layanan;
+
+|Admin|
+stop
+
+@enduml

@@ -1,0 +1,68 @@
+@startuml
+title Flowchart Kelola Galeri (Admin)
+
+start
+:Admin masuk ke menu Kelola Galeri;
+:Sistem tampilkan list galeri;
+
+:Admin pilih aksi;
+
+if (Pilih aksi?) then (Create)
+  repeat
+    :Admin klik tombol Tambah Foto;
+    :Sistem tampilkan form input;
+    :Admin upload gambar;
+    :Admin isi caption;
+    :Admin klik Simpan;
+    :Sistem validasi form;
+    
+    if (Valid?) then (Ya)
+      :Insert data ke database;
+      :Tampilkan notifikasi sukses;
+      :Refresh list galeri;
+      break
+    else (Tidak)
+      :Tampilkan pesan error;
+    endif
+  repeat while (Form belum valid?)
+
+elseif (Pilih aksi?) then (Update)
+  repeat
+    :Admin pilih foto dari list;
+    :Admin klik tombol Edit;
+    :Sistem tampilkan form dengan data lama;
+    :Admin edit caption;
+    :Admin klik Simpan;
+    :Sistem validasi form;
+    
+    if (Valid?) then (Ya)
+      :Update data di database;
+      :Tampilkan notifikasi sukses;
+      :Refresh list galeri;
+      break
+    else (Tidak)
+      :Tampilkan pesan error;
+    endif
+  repeat while (Form belum valid?)
+
+elseif (Pilih aksi?) then (Delete)
+  :Admin pilih foto dari list;
+  :Admin klik tombol Hapus;
+  :Sistem tampilkan popup konfirmasi;
+  
+  if (Yakin hapus?) then (Ya)
+    :Hapus data dari database;
+    :Tampilkan notifikasi sukses;
+    :Refresh list galeri;
+  else (Tidak)
+    :Tutup popup;
+    :Kembali ke list;
+  endif
+
+else (Keluar)
+  :Admin keluar dari menu;
+endif
+
+stop
+
+@enduml
