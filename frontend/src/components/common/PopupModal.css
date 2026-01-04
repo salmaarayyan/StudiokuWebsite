@@ -1,0 +1,138 @@
+.popup-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 12000;
+}
+
+.popup-card {
+  width: min(480px, 95vw);
+  background: #eeeaeb;
+  color: #000405;
+  border-radius: 16px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.2);
+  padding: 22px 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  backdrop-filter: blur(1px);
+}
+
+.popup-body {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.popup-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 20px;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  font-weight: 800;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.popup-text h3 {
+  margin: 8px 0 6px;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.popup-text p {
+  margin: 0;
+  color: #4b4f54;
+  line-height: 1.6;
+  font-size: 15px;
+}
+
+.popup-card.success .popup-icon {
+  background: #dff5e6;
+  color: #0c9b3f;
+}
+
+.popup-card.error .popup-icon {
+  background: #ffe8e8;
+  color: #d12f2f;
+}
+
+.popup-card.confirm .popup-icon {
+  background: #fff2e1;
+  color: #b07500;
+}
+
+.popup-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 2px;
+  flex-wrap: wrap;
+}
+
+.popup-btn {
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  font-size: 14px;
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.popup-btn.primary {
+  background: #efab46;
+  color: #000405;
+  box-shadow: 0 10px 24px rgba(239, 171, 70, 0.35);
+  border: 1px solid rgba(0, 0, 0, 0.02);
+}
+
+.popup-btn.primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 26px rgba(239, 171, 70, 0.45);
+}
+
+.popup-btn.primary:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.popup-btn.ghost {
+  background: #ffffff;
+  color: #000405;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.popup-btn.ghost:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 480px) {
+  .popup-card {
+    padding: 18px;
+  }
+
+  .popup-text h3 {
+    font-size: 16px;
+  }
+
+  .popup-btn {
+    width: 100%;
+  }
+
+  .popup-actions {
+    flex-direction: column-reverse;
+  }
+}
